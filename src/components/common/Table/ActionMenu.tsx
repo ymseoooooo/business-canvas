@@ -5,7 +5,7 @@ type ActionMenuProps = Omit<DropdownProps, 'children'>;
 
 export function ActionMenu(props: ActionMenuProps) {
   return (
-    <Dropdown {...props}>
+    <Dropdown {...props} trigger={['click']}>
       <Button type="text" icon={<MoreOutlined />} size="small" />
     </Dropdown>
   );

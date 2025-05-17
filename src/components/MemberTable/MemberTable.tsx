@@ -3,10 +3,16 @@ import type { TableColumnsType } from 'antd';
 import type { ItemType } from 'antd/es/menu/interface';
 
 import { Table, ActionMenu } from '@/components/common/Table';
-import { MemberInitialData, memberSchema } from '@/constants/member';
+import { memberSchemaData } from '@/constants/member';
 import { type DataRecord, type Schema } from '@/defines/schema';
 import { isPrimaryField } from '@/utils/schema';
 import { generateColumns } from '@/utils/table';
+import { useMemberModalContext } from '@/contexts/MemberModalContext';
+import { useMemberDataContext } from '@/contexts/MemberDataContext';
+
+interface MemberTableProps {
+  data: DataRecord[];
+}
 
 interface UseColumnsReturn {
   columns: TableColumnsType<DataRecord>;
@@ -18,6 +24,8 @@ interface UseColumnsParams {
 
 export function useMemberTable(params: UseColumnsParams): UseColumnsReturn {
   const { schema } = params;
+  const { openModal } = useMemberModalContext();
+  const { deleteMember } = useMemberDataContext();
 
   const columns = useMemo(() => {
     const filteredSchema = schema.filter(field => !isPrimaryField(field));
@@ -39,7 +47,7 @@ export function useMemberTable(params: UseColumnsParams): UseColumnsReturn {
               key: 'edit',
               label: '수정',
               onClick: () => {
-                console.log('Edit', record);
+                openModal(record);
               },
             },
             {
@@ -47,7 +55,7 @@ export function useMemberTable(params: UseColumnsParams): UseColumnsReturn {
               label: '삭제',
               danger: true,
               onClick: () => {
-                console.log('Delete', record);
+                deleteMember(record.id);
               },
             },
           ];
@@ -65,13 +73,13 @@ export function useMemberTable(params: UseColumnsParams): UseColumnsReturn {
     }
 
     return tableColumns;
-  }, [schema]);
+  }, [schema, openModal]);
 
   return { columns };
 }
 
-export function MemberTable() {
-  const { columns } = useMemberTable({ schema: memberSchema });
+export function MemberTable({ data }: MemberTableProps) {
+  const { columns } = useMemberTable({ schema: memberSchemaData });
 
-  return <Table columns={columns} dataSource={MemberInitialData} rowKey={row => row.id} pagination={false} />;
+  return <Table columns={columns} dataSource={data} rowKey={row => row.id} pagination={false} />;
 }
