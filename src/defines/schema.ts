@@ -13,18 +13,23 @@ interface FieldOptionBase {
   required?: boolean;
 }
 
-interface TextFieldOption extends FieldOptionBase {
+interface TextFieldRules extends FieldOptionBase {
   minLength?: number;
-  maxLength?: number;
+  maxLength: 20;
 }
 
-interface DateFieldOption extends FieldOptionBase {
+interface TextareaFieldRules extends FieldOptionBase {
+  minLength?: number;
+  maxLength: 50;
+}
+
+interface DateFieldRules extends FieldOptionBase {
   minDate?: string;
   maxDate?: string;
 }
 
-interface SelectFieldOption extends FieldOptionBase {}
-interface CheckboxFieldOption extends FieldOptionBase {}
+interface SelectFieldRules extends FieldOptionBase {}
+interface CheckboxFieldRules extends FieldOptionBase {}
 
 export interface FieldBaseDefinition {
   name: string;
@@ -40,32 +45,45 @@ export interface FieldPrimaryDefinition extends FieldBaseDefinition {
 }
 
 export interface TextFieldDefinition extends FieldBaseDefinition {
-  uiType: 'text' | 'textarea';
+  uiType: 'text';
   value: 'string';
-  options?: TextFieldOption;
+  rules: TextFieldRules;
+}
+
+export interface TextareaFieldDefinition extends FieldBaseDefinition {
+  uiType: 'textarea';
+  value: 'string';
+  rules: TextareaFieldRules;
 }
 
 export interface DateFieldDefinition extends FieldBaseDefinition {
   uiType: 'date';
   value: 'string';
-  options?: DateFieldOption;
+  rules?: DateFieldRules;
 }
 
 export interface CheckboxFieldDefinition extends FieldBaseDefinition {
   uiType: 'checkbox';
   value: 'boolean';
-  options?: CheckboxFieldOption;
+  rules?: CheckboxFieldRules;
 }
+
+type SelectFieldOption = {
+  label: string;
+  value: string;
+};
 
 export interface SelectFieldDefinition extends FieldBaseDefinition {
   uiType: 'select';
   value: 'string';
-  options?: SelectFieldOption;
+  rules?: SelectFieldRules;
+  options: SelectFieldOption[];
 }
 
 export type FieldDefinition =
   | FieldPrimaryDefinition
   | TextFieldDefinition
+  | TextareaFieldDefinition
   | DateFieldDefinition
   | CheckboxFieldDefinition
   | SelectFieldDefinition;

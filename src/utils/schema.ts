@@ -3,6 +3,7 @@ import {
   type CheckboxFieldDefinition,
   type FieldPrimaryDefinition,
   type TextFieldDefinition,
+  type TextareaFieldDefinition,
   type DateFieldDefinition,
   type SelectFieldDefinition,
 } from '@/defines/schema';
@@ -12,7 +13,11 @@ export const isPrimaryField = (field: FieldDefinition): field is FieldPrimaryDef
 };
 
 export const isTextField = (field: FieldDefinition): field is TextFieldDefinition => {
-  return field.uiType === 'text' || field.uiType === 'textarea';
+  return field.uiType === 'text';
+};
+
+export const isTextareaField = (field: FieldDefinition): field is TextareaFieldDefinition => {
+  return field.uiType === 'textarea';
 };
 
 export const isDateField = (field: FieldDefinition): field is DateFieldDefinition => {
