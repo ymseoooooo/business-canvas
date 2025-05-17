@@ -1,4 +1,4 @@
-import { DataRecord, Schema } from '../defines/schema';
+import { type DataRecord, type Schema } from '@/defines/schema';
 
 // 백엔드에서 데이터 스키마에 대한 정보를 가져왔다고 가정
 export const memberSchema: Schema = [

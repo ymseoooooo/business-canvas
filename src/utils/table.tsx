@@ -1,5 +1,5 @@
-import { Checkbox, TableColumnsType } from 'antd';
-import { DataRecord, FieldData, Schema } from '../defines/schema';
+import { Checkbox, type TableColumnsType } from 'antd';
+import { type DataRecord, type FieldData, type Schema } from '@/defines/schema';
 
 export const generateColumns = (schema: Schema): TableColumnsType<DataRecord> => {
   const columns: TableColumnsType<DataRecord> = schema.map(({ label, name }) => ({

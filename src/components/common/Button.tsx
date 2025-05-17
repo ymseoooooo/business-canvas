@@ -1,6 +1,6 @@
-import styled, { CSSProperties } from 'styled-components';
-import { Button as AntdButton, ButtonProps as AntdButtonProps } from 'antd';
-import { SizeType } from 'antd/es/config-provider/SizeContext';
+import styled, { type CSSProperties } from 'styled-components';
+import { Button as AntdButton, type ButtonProps as AntdButtonProps } from 'antd';
+import type { SizeType } from 'antd/es/config-provider/SizeContext';
 
 // 사이즈별 css를 다르게 적용할 수 있게함
 const BUTTON_SIZE: Record<NonNullable<SizeType>, CSSProperties> = {

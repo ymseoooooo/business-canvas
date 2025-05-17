@@ -1,4 +1,4 @@
-import { Button, Dropdown, DropdownProps } from 'antd';
+import { Button, Dropdown, type DropdownProps } from 'antd';
 import { MoreOutlined } from '@ant-design/icons';
 
 type ActionMenuProps = Omit<DropdownProps, 'children'>;

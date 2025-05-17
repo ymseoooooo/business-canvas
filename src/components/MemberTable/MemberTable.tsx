@@ -1,13 +1,12 @@
 import { useMemo } from 'react';
-import { TableColumnsType } from 'antd';
-import { ItemType } from 'antd/es/menu/interface';
+import type { TableColumnsType } from 'antd';
+import type { ItemType } from 'antd/es/menu/interface';
 
-import { Table } from './common/Table/Table';
-import { MemberInitialData, memberSchema } from '../constants/member';
-import { DataRecord, Schema } from '../defines/schema';
-import { isPrimaryField } from '../utils/schema';
-import { ActionMenu } from './common/Table';
-import { generateColumns } from '../utils/table';
+import { Table, ActionMenu } from '@/components/common/Table';
+import { MemberInitialData, memberSchema } from '@/constants/member';
+import { type DataRecord, type Schema } from '@/defines/schema';
+import { isPrimaryField } from '@/utils/schema';
+import { generateColumns } from '@/utils/table';
 
 interface UseColumnsReturn {
   columns: TableColumnsType<DataRecord>;

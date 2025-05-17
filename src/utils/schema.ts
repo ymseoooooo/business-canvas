@@ -1,11 +1,11 @@
 import {
-  FieldDefinition,
-  CheckboxFieldDefinition,
-  FieldPrimaryDefinition,
-  TextFieldDefinition,
-  DateFieldDefinition,
-  SelectFieldDefinition,
-} from '../defines/schema';
+  type FieldDefinition,
+  type CheckboxFieldDefinition,
+  type FieldPrimaryDefinition,
+  type TextFieldDefinition,
+  type DateFieldDefinition,
+  type SelectFieldDefinition,
+} from '@/defines/schema';
 
 export const isPrimaryField = (field: FieldDefinition): field is FieldPrimaryDefinition => {
   return field.isPrimary === true;

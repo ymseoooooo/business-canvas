@@ -1,5 +1,5 @@
-import { Table as AntdTable, TableProps as AntdTableProps } from 'antd';
-import { AnyObject } from 'antd/es/_util/type';
+import { Table as AntdTable, type TableProps as AntdTableProps } from 'antd';
+import { type AnyObject } from 'antd/es/_util/type';
 
 type TableProps<RecordType extends AnyObject = AnyObject> = AntdTableProps<RecordType>;
 

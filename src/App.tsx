@@ -1,6 +1,6 @@
-import './App.css';
 import { PlusOutlined } from '@ant-design/icons';
 import styled from 'styled-components';
+
 import { Button } from './components/common/Button';
 import { MemberTable } from './components/MemberTable';
 
