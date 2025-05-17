@@ -31,12 +31,18 @@ interface DateFieldRules extends FieldOptionBase {
 interface SelectFieldRules extends FieldOptionBase {}
 interface CheckboxFieldRules extends FieldOptionBase {}
 
+export interface FilterOption<T extends FieldDataType = FieldDataType> {
+  text: string;
+  value: FieldTypeMap[T];
+}
+
 export interface FieldBaseDefinition {
   name: string;
   label: string;
   uiType: FieldUi;
   value: FieldDataType;
   isPrimary?: boolean;
+  filters?: FilterOption<FieldDataType>[];
 }
 
 export interface FieldPrimaryDefinition extends FieldBaseDefinition {
