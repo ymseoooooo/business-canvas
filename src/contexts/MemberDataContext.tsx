@@ -1,6 +1,23 @@
-import { createContext, useContext, useState, type ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
 import type { DataRecord } from '@/defines/schema';
 import { MemberInitialData } from '@/constants/member';
+
+const STORAGE_KEY = 'memberDataList';
+const STORAGE_TYPE = import.meta.env.VITE_STORAGE || 'in-memory';
+
+const getInitialData = (): DataRecord[] => {
+  if (STORAGE_TYPE === 'local-storage') {
+    const savedData = localStorage.getItem(STORAGE_KEY);
+    return savedData ? JSON.parse(savedData) : MemberInitialData;
+  }
+  return MemberInitialData;
+};
+
+const saveToStorage = (data: DataRecord[]) => {
+  if (STORAGE_TYPE === 'local-storage') {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  }
+};
 
 interface MemberDataContextType {
   memberDataList: DataRecord[];
@@ -19,10 +36,14 @@ const MemberDataContext = createContext<MemberDataContextType>({
 });
 
 export function MemberDataProvider({ children }: { children: ReactNode }) {
-  const [memberDataList, setMemberDataList] = useState<DataRecord[]>(MemberInitialData);
+  const [memberDataList, setMemberDataList] = useState<DataRecord[]>(getInitialData);
+
+  useEffect(() => {
+    saveToStorage(memberDataList);
+  }, [memberDataList]);
 
   const addMember = (data: Omit<DataRecord, 'id'>) => {
-    const newRecord = { ...data, id: memberDataList.length + 1 };
+    const newRecord = { ...data, id: Date.now() };
     setMemberDataList(prev => [...prev, newRecord]);
   };
 
