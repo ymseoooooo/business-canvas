@@ -1,46 +1,22 @@
-# Getting Started with Create React App
+## 실행 방법
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+`yarn dev`
 
-## Available Scripts
+로컬 스토리지 테스트는 `.env` 파일의 주석을 풀어 테스트 해주시면 될 것 같습니다.
 
-In the project directory, you can run:
+## 잘했다고 생각되는 점
 
-### `npm start`
+1. 스키마 기반의 설계로 새로운 필드, 규칙 등이 생겨도 코드를 크게 수정하지 않고 유연하게 대응가능.
+2. 적절한 컴포넌트/관심사 분리
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## 아쉽다고 생각되는 점
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+1. 처음 antd를 사용하여 라이브러리 미숙함
+   - figma modal 디자인에서 확인 버튼이 비활성화 되어있는데 이는 폼 유효성이 검증되지 않으면 버튼이 비활성화 되어야 한다고 생각해 모든 value에 대해서 watch를 걸어놓아 리랜더링 이슈가 있음.
+   - 몇가지의 디자인 반영 못한 점이 있음.
+2. 설계를 깊게 하지 못하다 보니 타입 추론, 타입 가드에 대한 아쉬움
 
-### `npm test`
+## 개선하고 싶은 점
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- 모달쪽 submit 비활성화 구현으로 인한 리랜더링 이슈 때문에 버튼은 활성화 하고 필드별 onChange, onBlur, onSubmit을 통해 유효성 검사를 진행하여 에러를 표시하는 방식으로 개선하면 리렌더링 이슈는 사라질 것 같음.
+- 타입 설계를 깊게 하여 타입 추론, 타입 가드에 대한 아쉬움을 개선하고 싶음.
